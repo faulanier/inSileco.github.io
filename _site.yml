@@ -1,8 +1,8 @@
-name: "inSilico Blog"
+name: "inSileco Blog"
 output_dir: "docs"
 exclude: ["LICENSE", "README.html", "posts/*.Rmd"]
 navbar:
-  title: "inSilico Blog"
+  title: "inSileco Blog"
   left:
     - text: "Home"
       href: index.html

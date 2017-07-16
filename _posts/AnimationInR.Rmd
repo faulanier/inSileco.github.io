@@ -73,21 +73,21 @@ The package `animation`, which I used to create the animations in R, works with 
 
 ## Data
 
-There is a incredible amount of data available on the [NASA website](https://disc.gsfc.nasa.gov/uui/datasets?keywords=%22Aura%20OMI%22). For this post, we downloaded all available data from NASA's Ozone Monitoring Instrument (OMI) aboard the Earth Observing System's (EOS) Aura satellite. More specifically, we used [OMI/Aura Surface UVB Irradiance and Erythemal Dose Daily at a scale of 0.25 x 0.25 degree](https://disc.gsfc.nasa.gov/uui/datasets/OMUVBG_V003/summary?keywords=%22Aura%20OMI%22) and selected the daily erythemal irradiance (mW/m<sup>2</sup>), *i.e.* the potentially harmful range of UV radiations, from October 1<sup>st</sup> 2004 to April 5<sup>th</sup> 2017. We then selected only the years with 12 months worth of data to create the following figures, *i.e.* from January 1<sup>st</sup> 2005 to December 31<sup>st</sup> 2016. The resulting dataset is available here in the [letiR github page](https://github.com/letiR/letir.github.io/blob/master/data/MonthOMI.rds)
+There is a incredible amount of data available on the [NASA website](https://disc.gsfc.nasa.gov/uui/datasets?keywords=%22Aura%20OMI%22). For this post, we downloaded all available data from NASA's Ozone Monitoring Instrument (OMI) aboard the Earth Observing System's (EOS) Aura satellite. More specifically, we used [OMI/Aura Surface UVB Irradiance and Erythemal Dose Daily at a scale of 0.25 x 0.25 degree](https://disc.gsfc.nasa.gov/uui/datasets/OMUVBG_V003/summary?keywords=%22Aura%20OMI%22) and selected the daily erythemal irradiance (mW/m<sup>2</sup>), *i.e.* the potentially harmful range of UV radiations, from October 1<sup>st</sup> 2004 to April 5<sup>th</sup> 2017. We then selected only the years with 12 months worth of data to create the following figures, *i.e.* from January 1<sup>st</sup> 2005 to December 31<sup>st</sup> 2016. The resulting dataset is available here in the [letiR github page](https://github.com/letiR/letir.github.io/blob/master/assets/AnimationInR/MonthOMI.rds).
 
 The maps generated in this post require the user to load [`ocean`](http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/ne_10m_ocean.zip) shapefile from [Natural Earth](http://www.naturalearthdata.com/).
 
 <br/>
 
-```{r, loadData, message=F}
+```{r, loadData, message=FALSE}
 # UV data
-    UV <- readRDS('./data/MonthOMI.rds')
+    UV <- readRDS('./assets/AnimationInR/MonthOMI.rds')
 
 # Projection
     spatProj <- '+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs'
 
 # Ocean shapefile
-    ocean <- readOGR(dsn = "./data/shpfile/", layer = "ne_10m_ocean") %>%
+    ocean <- readOGR(dsn = "./assets/AnimationInR/shpfile/", layer = "ne_10m_ocean") %>%
              spTransform(CRSobj = CRS(spatProj))
 
     class(ocean)
@@ -142,7 +142,7 @@ Let's start with a simple animation of erythemal irradiance for 2005.
 
 <br/>
 
-```{r, animate1, eval = FALSE}
+```{r, animate1, fig.align='center', eval = FALSE}
 saveGIF({
         for(i in 1:ncol(labels)){
             par(mar = c(0,0,0,0), pch = 21,  xaxs = "i", yaxs = "i", family = "serif")
@@ -158,7 +158,7 @@ saveGIF({
 
 <br/>
 
-![](./assets/img/UV2005animate.gif)
+<center>![](./assets/img/UV2005animate.gif)</center>
 
 <br/>
 

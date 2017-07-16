@@ -13,15 +13,15 @@ library(rgdal)
 ## ----infosession---------------------------------------------------------
 sessionInfo()[[1]]$version.string
 
-## ---- loadData, message=F------------------------------------------------
+## ---- loadData, message=FALSE--------------------------------------------
 # UV data
-    UV <- readRDS('./data/MonthOMI.rds')
+    UV <- readRDS('./assets/AnimationInR/MonthOMI.rds')
 
 # Projection
     spatProj <- '+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs'
 
 # Ocean shapefile
-    ocean <- readOGR(dsn = "./data/shpfile/", layer = "ne_10m_ocean") %>%
+    ocean <- readOGR(dsn = "./assets/AnimationInR/shpfile/", layer = "ne_10m_ocean") %>%
              spTransform(CRSobj = CRS(spatProj))
 
     class(ocean)
@@ -58,7 +58,7 @@ sessionInfo()[[1]]$version.string
         }
     }
 
-## ---- animate1, eval = FALSE---------------------------------------------
+## ---- animate1, fig.align='center', eval = FALSE-------------------------
 ## saveGIF({
 ##         for(i in 1:ncol(labels)){
 ##             par(mar = c(0,0,0,0), pch = 21,  xaxs = "i", yaxs = "i", family = "serif")
